@@ -51,9 +51,7 @@ buttons.forEach((button) => {
     button.addEventListener('click', () => {
         playerSelection = button.value.toString();
         computerSelection = getComputerChoice();
-        console.log("Button clicked. Player selected: " + playerSelection);
-        console.log("Computer selected: " + computerSelection);
-        console.log(playRound(playerSelection, computerSelection));
+
         const result = document.querySelector('.result');
         const gameResult = document.createElement('div');
         gameResult.textContent = playRound(playerSelection, computerSelection);
