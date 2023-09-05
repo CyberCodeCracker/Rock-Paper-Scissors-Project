@@ -5,37 +5,75 @@ function getComputerChoice() {
 }
 
 let playerSelection;
-const computerSelection = getComputerChoice();
+let computerSelection;
+let playerScore = 0;
+let computerScore = 0;
 
-function playGame(playerSelection, computerSelection) {
+//The logic of the game
+function playRound(playerSelection, computerSelection) {
     if (playerSelection.toLowerCase() === "rock" && computerSelection === "scissors") {
-        return "You win! Rock wins against Scissors";
+        playerScore++;
+        computerScore--;
+        return "You win! Rock wins against Scissors. Current player score: " + playerScore + ".Current computer score: " + computerScore;
     }
     else if (playerSelection.toLowerCase() === "rock" && computerSelection === "paper") {
-        return "You lose! Rock loses to Paper";
+        playerScore--;
+        computerScore++;
+        return "You lose! Rock loses to Paper. Current player score: " + playerScore + ".Current computer score: " + computerScore;
     }
     else if (playerSelection.toLowerCase() === "paper" && computerSelection === "scissors") {
-        return "You lose! Paper loses to Scissors";
+        playerScore--;
+        computerScore++;
+        return "You lose! Paper loses to Scissors. Current player score: " + playerScore + ".Current computer score: " + computerScore;
     }
     else if (playerSelection.toLowerCase() === "paper" && computerSelection === "rock") {
-        return "You win! Paper wins against Rock";
+        playerScore++;
+        computerScore--;
+        return "You win! Paper wins against Rock. Current player score: " + playerScore + ".Current computer score: " + computerScore;
     }
     else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "paper") {
-        return "You win! Scissors win against Paper";
+        playerScore++;
+        computerScore--;
+        return "You win! Scissors win against Paper. Current player score: " + playerScore + ".Current computer score: " + computerScore;
     }
     else if (playerSelection.toLowerCase() === "scissors" && computerSelection === "rock") {
-        return "You lose! Scissors lose to Rock";
+        playerScore--;
+        computerScore++;
+        return "You lose! Scissors lose to Rock. Current player score: " + playerScore + ".Current computer score: " + computerScore;
     }
     else {
-        return "Same choice, play again!"
+        return "Same choice, play again!. Current player score: " + playerScore + ".Current computer score: " + computerScore;
     }
 }
 
-function game(playGame) {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("what is your choice");
-        console.log(playGame(playerSelection, computerSelection)); 
-    }    
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playerSelection = button.value.toString();
+        computerSelection = getComputerChoice();
+        console.log("Button clicked. Player selected: " + playerSelection);
+        console.log("Computer selected: " + computerSelection);
+        console.log(playRound(playerSelection, computerSelection));
+        const result = document.querySelector('.result');
+        const gameResult = document.createElement('div');
+        gameResult.textContent = playRound(playerSelection, computerSelection);
+
+        result.appendChild(gameResult);
+        if (playerScore === 5) {
+            gameResult.textContent = "You win!";
+        }
+
+        else if (computerScore === 5) {
+            gameResult.textContent = "You lose :'(";
+        }
+    })
+})
+
+
+
+//Plays rock-paper-scissors for five times
+/*function game(playGame) {
+
 }
 
-game(playGame);
+game(playGame); */
