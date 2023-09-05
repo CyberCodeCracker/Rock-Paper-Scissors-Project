@@ -46,6 +46,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// Uses the DOM and event handling to play the game by using the buttons in the html file
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -60,7 +61,7 @@ buttons.forEach((button) => {
         if (playerScore === 5) {
             gameResult.textContent = "You win!";
         }
-
+        
         else if (computerScore === 5) {
             gameResult.textContent = "You lose :'(";
         }
